@@ -16,8 +16,9 @@ body {
     width: 100%;
     height: 100vh;
     box-sizing: border-box;
-    max-width: 800px;
+    max-width: 500px;
     margin: 0 auto;
+    padding: 0 10px;
 }
 
 canvas {
@@ -75,21 +76,71 @@ canvas {
         flex-direction: column;
         height: auto;
         min-height: auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
     
     .instructions {
         max-height: 40vh;
         overflow-y: auto;
         margin-bottom: 20px;
+        margin-top: auto;
+        padding-top: 10px;
     }
     
     .game-container {
         height: auto;
         min-height: 50vh;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
     }
     
     canvas {
         max-height: 50vh;
+        max-height: calc(100vh - 300px);
+        width: auto;
+    }
+    
+    .controls-section {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: #212529;
+        padding-top: 10px;
+    }
+    
+    .btn-control {
+        width: 50px;
+        height: 50px;
+        padding: 0.5rem;
+    }
+    
+    .wrapper {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .game-container {
+        flex: none;  /* Remove flex grow */
+        margin-bottom: 1rem;
+    }
+    
+    .controls-section {
+        display: block;
+        margin-bottom: 1rem;
+    }
+    
+    canvas#tetris {
+        max-height: 60vh;  /* Adjust game height */
+        width: auto;
+    }
+    
+    .instructions {
+        margin-top: 0;  /* Remove auto margin */
     }
 }
 
@@ -262,4 +313,11 @@ canvas {
     .controls-section {
         display: none !important;
     }
+}
+
+.preview-mini {
+    width: 80px;
+    height: 80px;
+    background-color: #1a1d20;
+    border-radius: 4px;
 }

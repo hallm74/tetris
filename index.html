@@ -9,7 +9,57 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="instructions">
+        <!-- Score and preview at top -->
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="card-title mb-0">Score: <span id="score">0</span></h6>
+                    <div class="preview-mini">
+                        <canvas id="preview" width="80" height="80"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game container -->
+        <div class="game-container mb-3">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <canvas id="tetris" width="240" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls section moved between game and instructions -->
+        <div class="controls-section mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="controls d-flex flex-column align-items-center">
+                        <button id="rotate" class="btn btn-primary btn-control mb-2">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                        <div class="d-flex justify-content-center gap-2">
+                            <button id="left" class="btn btn-primary btn-control">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                            <button id="down" class="btn btn-primary btn-control">
+                                <i class="fas fa-arrow-down"></i>
+                            </button>
+                            <button id="right" class="btn btn-primary btn-control">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Instructions at bottom -->
+        <div class="instructions mt-3">
             <button class="btn btn-secondary instruction-toggle w-100" type="button" 
                     data-bs-toggle="collapse" 
                     data-bs-target="#howToPlay" 
@@ -38,55 +88,6 @@
                         <li>Stack reaches top = Game Over</li>
                         <li>100 points per line cleared</li>
                     </ul>
-                </div>
-            </div>
-        </div>
-    <div class="game-container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Tetris</h5>
-                        <canvas id="tetris" width="240" height="400"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card preview-card shadow-sm">
-                    <div class="card-body">
-                        <h6 class="card-title">Next Piece</h6>
-                        <canvas id="preview" width="160" height="160"></canvas>
-                    </div>
-                </div>
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h6 class="card-title">Score: <span id="score">0</span></h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Single controls section -->
-    <div class="controls-section">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h6 class="card-title">Controls</h6>
-                <div class="controls d-flex flex-column align-items-center">
-                    <button id="rotate" class="btn btn-primary btn-control mb-2">
-                        <i class="fas fa-redo"></i>
-                    </button>
-                    <div class="d-flex justify-content-center gap-2">
-                        <button id="left" class="btn btn-primary btn-control">
-                            <i class="fas fa-arrow-left"></i>
-                        </button>
-                        <button id="down" class="btn btn-primary btn-control">
-                            <i class="fas fa-arrow-down"></i>
-                        </button>
-                        <button id="right" class="btn btn-primary btn-control">
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>

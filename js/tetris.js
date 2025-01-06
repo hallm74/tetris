@@ -183,18 +183,29 @@ function drawPreview(piece) {
     previewContext.fillStyle = '#000';
     previewContext.fillRect(0, 0, previewCanvas.width, previewCanvas.height);
     
-    // Center the piece in preview
-    const xOffset = (previewCanvas.width - piece[0].length * 20) / 2;
-    const yOffset = (previewCanvas.height - piece.length * 20) / 2;
+    // Center the piece in preview - using smaller block size for mini preview
+    const blockSize = 15;
+    const xOffset = (previewCanvas.width - piece[0].length * blockSize) / 2;
+    const yOffset = (previewCanvas.height - piece.length * blockSize) / 2;
     
     // Draw the piece
-    previewContext.fillStyle = '#f00';  // Using single color for preview
+    previewContext.fillStyle = '#f00';
     for (let y = 0; y < piece.length; y++) {
         for (let x = 0; x < piece[y].length; x++) {
             if (piece[y][x]) {
-                previewContext.fillRect(xOffset + x * 20, yOffset + y * 20, 19, 19);
+                previewContext.fillRect(
+                    xOffset + x * blockSize, 
+                    yOffset + y * blockSize, 
+                    blockSize - 1, 
+                    blockSize - 1
+                );
                 previewContext.strokeStyle = 'white';
-                previewContext.strokeRect(xOffset + x * 20, yOffset + y * 20, 19, 19);
+                previewContext.strokeRect(
+                    xOffset + x * blockSize, 
+                    yOffset + y * blockSize, 
+                    blockSize - 1, 
+                    blockSize - 1
+                );
             }
         }
     }
