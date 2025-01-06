@@ -16,16 +16,28 @@ const SHAPES = [
     [[0, 1, 1], [1, 1, 0]]  // Z
 ];
 
+const COLORS = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff', '#fff'];
+
 let score = 0;
+let nextPiece = null;
 let currentPiece = null;
 let currentPieceX = 0;
 let currentPieceY = 0;
 
+const previewCanvas = document.getElementById('preview');
+const previewContext = previewCanvas.getContext('2d');
+
 function createPiece() {
-    const shape = SHAPES[Math.floor(Math.random() * SHAPES.length)];
-    currentPiece = shape;
-    currentPieceX = Math.floor(BOARD_WIDTH / 2 - shape[0].length / 2);
+    if (nextPiece === null) {
+        nextPiece = SHAPES[Math.floor(Math.random() * SHAPES.length)];
+    }
+    
+    currentPiece = nextPiece;
+    currentPieceX = Math.floor(BOARD_WIDTH / 2 - currentPiece[0].length / 2);
     currentPieceY = 0;
+    
+    nextPiece = SHAPES[Math.floor(Math.random() * SHAPES.length)];
+    drawPreview(nextPiece);
 }
 
 function draw() {
@@ -128,41 +140,65 @@ document.addEventListener('keydown', event => {
 // Add after keyboard controls:
 
 // Touch controls
-document.getElementById('left').addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    currentPieceX--;
-    if (collision()) currentPieceX++;
-    draw();
+['left', 'right', 'down', 'rotate'].forEach(id => {
+    const button = document.getElementById(id);
+    
+    // Handle both touch and click events
+    ['touchstart', 'mousedown'].forEach(eventType => {
+        button.addEventListener(eventType, (e) => {
+            e.preventDefault();
+            switch(id) {
+                case 'left':
+                    currentPieceX--;
+                    if (collision()) currentPieceX++;
+                    break;
+                case 'right':
+                    currentPieceX++;
+                    if (collision()) currentPieceX--;
+                    break;
+                case 'down':
+                    currentPieceY++;
+                    if (collision()) {
+                        currentPieceY--;
+                        merge();
+                        clearLines();
+                        createPiece();
+                    }
+                    break;
+                case 'rotate':
+                    const rotated = currentPiece[0].map((_, i) => 
+                        currentPiece.map(row => row[row.length - 1 - i]));
+                    const previousPiece = currentPiece;
+                    currentPiece = rotated;
+                    if (collision()) currentPiece = previousPiece;
+                    break;
+            }
+            draw();
+        });
+    });
 });
 
-document.getElementById('right').addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    currentPieceX++;
-    if (collision()) currentPieceX--;
-    draw();
-});
-
-document.getElementById('down').addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    currentPieceY++;
-    if (collision()) {
-        currentPieceY--;
-        merge();
-        clearLines();
-        createPiece();
+function drawPreview(piece) {
+    // Clear preview canvas
+    previewContext.fillStyle = '#000';
+    previewContext.fillRect(0, 0, previewCanvas.width, previewCanvas.height);
+    
+    // Center the piece in preview
+    const xOffset = (previewCanvas.width - piece[0].length * 20) / 2;
+    const yOffset = (previewCanvas.height - piece.length * 20) / 2;
+    
+    // Draw the piece
+    previewContext.fillStyle = '#f00';  // Using single color for preview
+    for (let y = 0; y < piece.length; y++) {
+        for (let x = 0; x < piece[y].length; x++) {
+            if (piece[y][x]) {
+                previewContext.fillRect(xOffset + x * 20, yOffset + y * 20, 19, 19);
+                previewContext.strokeStyle = 'white';
+                previewContext.strokeRect(xOffset + x * 20, yOffset + y * 20, 19, 19);
+            }
+        }
     }
-    draw();
-});
-
-document.getElementById('rotate').addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    const rotated = currentPiece[0].map((_, i) => 
-        currentPiece.map(row => row[row.length - 1 - i]));
-    const previousPiece = currentPiece;
-    currentPiece = rotated;
-    if (collision()) currentPiece = previousPiece;
-    draw();
-});
+}
 
 function gameLoop() {
     currentPieceY++;
