@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Tetris</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+<body>
+    <div class="wrapper">
+        <div class="instructions">
+            <h2>How to Play</h2>
+            <div class="instruction-content">
+                <h3>Desktop Controls:</h3>
+                <ul>
+                    <li>← → : Move piece left/right</li>
+                    <li>↓ : Move piece down</li>
+                    <li>↑ : Rotate piece</li>
+                </ul>
+                
+                <h3>Mobile Controls:</h3>
+                <ul>
+                    <li>Use on-screen buttons</li>
+                    <li>Tap ↻ to rotate</li>
+                    <li>Tap arrows to move</li>
+                </ul>
+                
+                <h3>Game Rules:</h3>
+                <ul>
+                    <li>Complete lines to score points</li>
+                    <li>Stack reaches top = Game Over</li>
+                    <li>100 points per line cleared</li>
+                </ul>
+            </div>
+        </div>
+    <div class="game-container">
+        <canvas id="tetris" width="240" height="400"></canvas>
+        <div class="info">
+            <div>Score: <span id="score">0</span></div>
+            <div>Level: <span id="level">1</span></div>
+        </div>
+        <div class="controls">
+            <div class="control-row">
+                <button class="control-btn" id="rotate">↻</button>
+            </div>
+            <div class="control-row">
+                <button class="control-btn" id="left">←</button>
+                <button class="control-btn" id="down">↓</button>
+                <button class="control-btn" id="right">→</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/tetris.js"></script>
+</body>
+</html>

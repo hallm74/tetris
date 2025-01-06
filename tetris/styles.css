@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    touch-action: none;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+canvas {
+    border: 2px solid #333;
+    background: #111;
+    max-width: 100%;
+    height: auto;
+}
+
+.info {
+    margin-top: 20px;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+.controls {
+    display: none;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.control-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    touch-action: none;
+}
+
+@media (max-width: 768px) {
+    .controls {
+        display: block;
+    }
+    
+    canvas {
+        max-height: 60vh;
+    }
+}
+
+/* Add to existing CSS */
+.wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.instructions {
+    width: 300px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.instructions h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.instruction-content {
+    font-size: 14px;
+}
+
+.instruction-content h3 {
+    color: #444;
+    margin: 15px 0 10px;
+}
+
+.instruction-content ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.instruction-content li {
+    margin: 8px 0;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+    
+    .instructions {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .game-container {
+        height: auto;
+    }
+}
